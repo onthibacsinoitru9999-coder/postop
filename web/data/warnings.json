@@ -1,0 +1,88 @@
+{
+  "general_warnings": [
+    {
+      "id": "fever",
+      "title": "Sốt cao",
+      "description": "Nhiệt độ cơ thể lớn hơn 38.5°C kèm lạnh run.",
+      "severity": "critical",
+      "icon": "🌡️",
+      "action": "Liên hệ bác sĩ ngay hoặc đến cơ sở y tế"
+    },
+    {
+      "id": "bleeding",
+      "title": "Chảy máu bất thường",
+      "description": "Vết mổ chảy máu nhiều, thấm ướt sũng băng gạc đỏ tươi, thay băng liên tục nhưng vẫn thấm ướt.",
+      "severity": "critical",
+      "icon": "🩸",
+      "action": "Đến phòng cấp cứu NGAY"
+    },
+    {
+      "id": "severe_pain",
+      "title": "Đau dữ dội",
+      "description": "Đau tại vùng phẫu thuật đột ngột tăng lên dữ dội, uống thuốc giảm đau không đỡ.",
+      "severity": "critical",
+      "icon": "💥",
+      "action": "Đến cơ sở y tế NGAY"
+    },
+    {
+      "id": "infection_signs",
+      "title": "Dấu hiệu nhiễm trùng vết mổ",
+      "description": "Vết mổ sưng tấy đỏ rực, nóng, có mủ đục chảy ra, hoặc có mùi hôi.",
+      "severity": "high",
+      "icon": "🦠",
+      "action": "Liên hệ bác sĩ sớm nhất có thể"
+    },
+    {
+      "id": "breathing_issue",
+      "title": "Khó thở, đau ngực",
+      "description": "Cảm thấy khó thở đột ngột, đau ngực, ho ra máu.",
+      "severity": "critical",
+      "icon": "🫁",
+      "action": "Gọi cấp cứu 115 NGAY"
+    },
+    {
+      "id": "dvt_signs",
+      "title": "Sưng phù một bên chân",
+      "description": "Bắp chân sưng to, đỏ, đau rát (dấu hiệu của huyết khối tĩnh mạch sâu).",
+      "severity": "critical",
+      "icon": "🦵",
+      "action": "Đến phòng cấp cứu NGAY"
+    },
+    {
+      "id": "urinary_retention",
+      "title": "Bí tiểu",
+      "description": "Không thể đi tiểu tiện trong vòng 6-8 giờ sau mổ, cảm giác căng tức bụng dưới.",
+      "severity": "high",
+      "icon": "🚽",
+      "action": "Đến cơ sở y tế"
+    },
+    {
+      "id": "vomiting",
+      "title": "Buồn nôn và nôn mửa liên tục",
+      "description": "Nôn nhiều không thể ăn uống hoặc uống thuốc được trong 24 giờ.",
+      "severity": "medium",
+      "icon": "🤢",
+      "action": "Liên hệ bác sĩ"
+    }
+  ],
+  "procedure_specific_warnings": {
+    "lap_chole": [
+      { "id": "bile_leak", "title": "Dấu hiệu rò mật", "description": "Vàng da, vàng mắt, đau tức hạ sườn phải, nước tiểu sẫm màu.", "severity": "critical" }
+    ],
+    "appe": [
+      { "id": "abscess", "title": "Áp xe tồn dư", "description": "Sốt cao trở lại, đau quặn bụng, tiêu chảy có nhầy mủ.", "severity": "high" }
+    ],
+    "hernia": [
+      { "id": "scrotal_swelling", "title": "Sưng to bìu đột ngột", "description": "Bìu sưng to căng bóng, bầm tím đậm lan rộng nhanh chóng.", "severity": "high" }
+    ],
+    "tka": [
+      { "id": "knee_stiffness", "title": "Cứng khớp gối", "description": "Khớp gối co cứng lại, không thể gập hoặc duỗi dù đã tập vật lý trị liệu.", "severity": "medium" }
+    ],
+    "acl": [
+      { "id": "instability", "title": "Khớp gối lỏng lẻo", "description": "Cảm giác sụp gối, lỏng gối khi đứng trụ trên chân phẫu thuật.", "severity": "high" }
+    ],
+    "c_section": [
+      { "id": "lochia_foul", "title": "Sản dịch bất thường", "description": "Sản dịch có mùi hôi khó chịu, hoặc đột ngột ra máu đỏ tươi nhiều trở lại sau nhiều ngày đã giảm.", "severity": "critical" }
+    ]
+  }
+}

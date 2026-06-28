@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PostOp Care — Hệ thống Hướng dẫn Theo dõi Sau Phẫu Thuật</title>
+    <meta name="description" content="PostOp Care giúp bác sĩ tạo mã QR hướng dẫn chăm sóc sau phẫu thuật cá nhân hóa, giúp bệnh nhân theo dõi quá trình hồi phục dễ dàng và hiệu quả.">
+    <meta name="keywords" content="PostOp Care, chăm sóc sau phẫu thuật, hướng dẫn hậu phẫu, QR y tế, theo dõi hồi phục, y tế số">
+    <meta name="author" content="PostOp Care Team">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0A4DA2">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="PostOp Care — Hệ thống Hướng dẫn Theo dõi Sau Phẫu Thuật">
+    <meta property="og:description" content="Tạo mã QR hướng dẫn chăm sóc sau phẫu thuật cá nhân hóa. Giúp bệnh nhân theo dõi quá trình hồi phục một cách dễ dàng.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:site_name" content="PostOp Care">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <style>
+        /* ===== CSS Reset & Base ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --color-primary: #0A4DA2;
+            --color-primary-light: #1E6FD9;
+            --color-primary-dark: #063A7A;
+            --color-accent: #00D4AA;
+            --color-accent-light: #33EDCA;
+            --color-bg-dark: #040E1F;
+            --color-bg-section: #F0F5FC;
+            --color-text: #1A2B4A;
+            --color-text-light: #6B7FA3;
+            --color-white: #FFFFFF;
+            --color-glass: rgba(255, 255, 255, 0.06);
+            --color-glass-border: rgba(255, 255, 255, 0.12);
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-heading: 'Outfit', 'Inter', sans-serif;
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 22px;
+            --radius-xl: 28px;
+            --shadow-card: 0 4px 24px rgba(10, 77, 162, 0.08), 0 1px 4px rgba(10, 77, 162, 0.04);
+            --shadow-card-hover: 0 12px 40px rgba(10, 77, 162, 0.15), 0 4px 12px rgba(10, 77, 162, 0.08);
+            --shadow-glow: 0 0 40px rgba(0, 212, 170, 0.2);
+            --transition-smooth: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .landing-hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(160deg, #040E1F 0%, #0A2A5C 30%, #0A4DA2 60%, #1158B0 80%, #0E3D82 100%);
+            overflow: hidden;
+            padding: 6rem 2rem 4rem;
+        }
+
+        /* Animated medical illustration elements */
+        .landing-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                /* Floating circles */
+                radial-gradient(circle at 75% 20%, rgba(0, 212, 170, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 85% 60%, rgba(30, 111, 217, 0.15) 0%, transparent 35%),
+                radial-gradient(circle at 65% 80%, rgba(0, 212, 170, 0.08) 0%, transparent 30%),
+                /* Subtle grid pattern */
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 100% 100%, 60px 60px, 60px 60px;
+            animation: heroShimmer 12s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes heroShimmer {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        /* Animated floating medical elements */
+        .hero-medical-bg {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .hero-medical-bg .med-circle {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 212, 170, 0.15);
+            animation: floatCircle 8s ease-in-out infinite;
+        }
+        .hero-medical-bg .med-circle:nth-child(1) {
+            width: 120px; height: 120px; top: 12%; right: 8%;
+            animation-delay: 0s; animation-duration: 9s;
+            border-color: rgba(0, 212, 170, 0.18);
+        }
+        .hero-medical-bg .med-circle:nth-child(2) {
+            width: 80px; height: 80px; top: 55%; right: 15%;
+            animation-delay: -3s; animation-duration: 7s;
+            border-color: rgba(30, 111, 217, 0.2);
+        }
+        .hero-medical-bg .med-circle:nth-child(3) {
+            width: 200px; height: 200px; bottom: 10%; right: 25%;
+            animation-delay: -5s; animation-duration: 11s;
+            border-color: rgba(0, 212, 170, 0.1);
+        }
+        .hero-medical-bg .med-circle:nth-child(4) {
+            width: 60px; height: 60px; top: 30%; right: 35%;
+            animation-delay: -2s; animation-duration: 6s;
+            background: rgba(0, 212, 170, 0.06);
+            border-color: rgba(0, 212, 170, 0.12);
+        }
+
+        /* Medical cross/plus signs */
+        .hero-medical-bg .med-cross {
+            position: absolute;
+            width: 30px; height: 30px;
+            animation: floatCross 10s ease-in-out infinite;
+        }
+        .hero-medical-bg .med-cross::before,
+        .hero-medical-bg .med-cross::after {
+            content: '';
+            position: absolute;
+            background: rgba(0, 212, 170, 0.2);
+            border-radius: 2px;
+        }
+        .hero-medical-bg .med-cross::before {
+            width: 4px; height: 100%;
+            left: 50%; transform: translateX(-50%);
+        }
+        .hero-medical-bg .med-cross::after {
+            height: 4px; width: 100%;
+            top: 50%; transform: translateY(-50%);
+        }
+        .hero-medical-bg .med-cross:nth-child(5) {
+            top: 18%; right: 22%; animation-delay: -1s;
+        }
+        .hero-medical-bg .med-cross:nth-child(6) {
+            top: 65%; right: 5%; animation-delay: -4s; animation-duration: 8s;
+            width: 22px; height: 22px;
+        }
+        .hero-medical-bg .med-cross:nth-child(7) {
+            bottom: 25%; right: 40%; animation-delay: -6s; animation-duration: 12s;
+            width: 18px; height: 18px;
+        }
+        .hero-medical-bg .med-cross:nth-child(8) {
+            top: 8%; right: 45%; animation-delay: -2s; animation-duration: 9s;
+            width: 14px; height: 14px;
+        }
+
+        /* Pulse line */
+        .hero-medical-bg .med-pulse {
+            position: absolute;
+            bottom: 30%;
+            right: 10%;
+            width: 300px;
+            height: 60px;
+            opacity: 0.12;
+            animation: pulseLine 4s ease-in-out infinite;
+        }
+        .hero-medical-bg .med-pulse::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(135deg, transparent 0%, transparent 20%, rgba(0, 212, 170, 0.6) 20%, rgba(0, 212, 170, 0.6) 20.5%, transparent 20.5%, transparent 30%, rgba(0, 212, 170, 0.6) 30%, rgba(0, 212, 170, 0.6) 30.5%, transparent 30.5%, transparent 35%, rgba(0, 212, 170, 0.8) 35%, rgba(0, 212, 170, 0.8) 36%, transparent 36%, transparent 40%, rgba(0, 212, 170, 0.8) 40%, rgba(0, 212, 170, 0.8) 41%, transparent 41%, transparent 50%, rgba(0, 212, 170, 0.6) 50%, rgba(0, 212, 170, 0.6) 50.5%, transparent 50.5%, transparent 100%);
+        }
+
+        /* Heartbeat dot */
+        .hero-medical-bg .med-dot {
+            position: absolute;
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: var(--color-accent);
+            box-shadow: 0 0 20px rgba(0, 212, 170, 0.5), 0 0 60px rgba(0, 212, 170, 0.2);
+            animation: pulseDot 2s ease-in-out infinite;
+        }
+        .hero-medical-bg .med-dot:nth-child(10) { top: 40%; right: 18%; animation-delay: 0s; }
+        .hero-medical-bg .med-dot:nth-child(11) { top: 75%; right: 30%; animation-delay: -1s; width: 6px; height: 6px; }
+        .hero-medical-bg .med-dot:nth-child(12) { top: 22%; right: 50%; animation-delay: -0.5s; width: 8px; height: 8px; }
+
+        @keyframes floatCircle {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-18px) rotate(5deg); }
+            66% { transform: translateY(12px) rotate(-3deg); }
+        }
+        @keyframes floatCross {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+            50% { transform: translateY(-20px) rotate(90deg); opacity: 1; }
+        }
+        @keyframes pulseLine {
+            0%, 100% { opacity: 0.08; transform: scaleX(1); }
+            50% { opacity: 0.18; transform: scaleX(1.03); }
+        }
+        @keyframes pulseDot {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.6); opacity: 1; }
+        }
+
+        .hero-container {
+            position: relative;
+            z-index: 2;
+            max-width: 780px;
+            width: 100%;
+            margin: 0 auto 0 max(2rem, calc((100vw - 1200px) / 2));
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            border-radius: 100px;
+            background: var(--color-glass);
+            border: 1px solid var(--color-glass-border);
+            color: var(--color-accent-light);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .landing-title {
+            font-family: var(--font-heading);
+            font-size: clamp(3rem, 7vw, 5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, var(--color-white) 0%, var(--color-accent-light) 50%, var(--color-accent) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.75rem;
+            animation: fadeInUp 0.8s ease-out 0.15s both;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-heading);
+            font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 1.25rem;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        .hero-description {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 540px;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.8s ease-out 0.45s both;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 30px;
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all var(--transition-smooth);
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn i { width: 20px; height: 20px; }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-accent) 0%, #00B894 100%);
+            color: var(--color-bg-dark);
+            box-shadow: 0 4px 20px rgba(0, 212, 170, 0.3), 0 0 0 0 rgba(0, 212, 170, 0);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 32px rgba(0, 212, 170, 0.4), 0 0 0 4px rgba(0, 212, 170, 0.1);
+        }
+        .btn-primary:active { transform: translateY(-1px); }
+
+        .btn-secondary {
+            background: var(--color-glass);
+            color: var(--color-white);
+            border: 1px solid var(--color-glass-border);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px rgba(10, 77, 162, 0.3);
+        }
+        .btn-secondary:active { transform: translateY(-1px); }
+
+        /* ===== SECTION COMMONS ===== */
+        .landing-section {
+            padding: 6rem 2rem;
+        }
+
+        .section-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            text-align: center;
+            color: var(--color-text);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-title-accent {
+            display: block;
+            width: 50px;
+            height: 4px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+            margin: 0.75rem auto 3.5rem;
+        }
+
+        /* ===== FEATURES SECTION ===== */
+        .features-section {
+            background: var(--color-bg-section);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .landing-feature-card {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            padding: 2.25rem 1.75rem;
+            text-align: center;
+            border: 1px solid rgba(10, 77, 162, 0.06);
+            box-shadow: var(--shadow-card);
+            transition: all var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+        .landing-feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+            opacity: 0;
+            transition: opacity var(--transition-smooth);
+        }
+        .landing-feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-card-hover);
+        }
+        .landing-feature-card:hover::before { opacity: 1; }
+
+        .feature-icon-wrap {
+            width: 64px; height: 64px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, rgba(10, 77, 162, 0.08), rgba(0, 212, 170, 0.08));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+            transition: all var(--transition-smooth);
+        }
+        .feature-icon-wrap i {
+            width: 28px; height: 28px;
+            color: var(--color-primary);
+            transition: color var(--transition-smooth);
+        }
+        .landing-feature-card:hover .feature-icon-wrap {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            box-shadow: var(--shadow-glow);
+        }
+        .landing-feature-card:hover .feature-icon-wrap i {
+            color: var(--color-white);
+        }
+
+        .feature-title {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-desc {
+            font-size: 0.9rem;
+            color: var(--color-text-light);
+            line-height: 1.65;
+        }
+
+        /* ===== HOW IT WORKS ===== */
+        .how-section {
+            background: var(--color-white);
+        }
+
+        .steps-container {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 0;
+            flex-wrap: wrap;
+        }
+
+        .landing-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            max-width: 300px;
+            padding: 1rem 1.5rem;
+            position: relative;
+        }
+
+        .step-number {
+            width: 52px; height: 52px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+            color: var(--color-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 1.25rem;
+            box-shadow: 0 4px 16px rgba(10, 77, 162, 0.25);
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-icon-wrap {
+            width: 72px; height: 72px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(10, 77, 162, 0.06), rgba(0, 212, 170, 0.06));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .step-icon-wrap i {
+            width: 30px; height: 30px;
+            color: var(--color-primary);
+        }
+
+        .step-title {
+            font-family: var(--font-heading);
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 0.4rem;
+        }
+
+        .step-desc {
+            font-size: 0.88rem;
+            color: var(--color-text-light);
+            line-height: 1.6;
+        }
+
+        /* Connecting line between steps */
+        .step-connector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 24px;
+            align-self: flex-start;
+            margin-top: 0;
+        }
+        .step-connector-line {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+            border-radius: 2px;
+            position: relative;
+        }
+        .step-connector-line::after {
+            content: '';
+            position: absolute;
+            right: -4px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 5px solid transparent;
+            border-left: 7px solid var(--color-accent);
+        }
+
+        /* ===== FOOTER ===== */
+        .landing-footer {
+            background: var(--color-bg-dark);
+            color: rgba(255, 255, 255, 0.5);
+            text-align: center;
+            padding: 3rem 2rem;
+            font-size: 0.88rem;
+        }
+        .footer-brand {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.7s ease-out forwards;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .landing-hero { padding: 5rem 1.5rem 3rem; }
+            .hero-container { margin: 0 auto; }
+            .hero-cta-group { flex-direction: column; }
+            .btn { justify-content: center; width: 100%; }
+            .landing-section { padding: 4rem 1.5rem; }
+            .step-connector { display: none; }
+            .steps-container { flex-direction: column; align-items: center; gap: 1.5rem; }
+            .hero-medical-bg .med-pulse { display: none; }
+            .hero-medical-bg .med-circle:nth-child(3) { display: none; }
+        }
+
+        @media (max-width: 480px) {
+            .landing-title { font-size: 2.5rem; }
+            .features-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HERO ===== -->
+    <header class="landing-hero" id="hero">
+        <!-- Animated medical illustration background -->
+        <div class="hero-medical-bg" aria-hidden="true">
+            <!-- Floating circles -->
+            <div class="med-circle"></div>
+            <div class="med-circle"></div>
+            <div class="med-circle"></div>
+            <div class="med-circle"></div>
+            <!-- Medical crosses -->
+            <div class="med-cross"></div>
+            <div class="med-cross"></div>
+            <div class="med-cross"></div>
+            <div class="med-cross"></div>
+            <!-- Pulse line -->
+            <div class="med-pulse"></div>
+            <!-- Heartbeat dots -->
+            <div class="med-dot"></div>
+            <div class="med-dot"></div>
+            <div class="med-dot"></div>
+        </div>
+
+        <div class="hero-container">
+            <span class="hero-badge">Phiên bản 2.0 ✨</span>
+
+            <h1 class="landing-title">PostOp Care</h1>
+
+            <p class="hero-subtitle">Hệ thống Hướng dẫn Theo dõi Sau Phẫu Thuật</p>
+
+            <p class="hero-description">
+                Nền tảng y tế số giúp bác sĩ tạo hướng dẫn chăm sóc sau phẫu thuật cá nhân hóa 
+                thông qua mã QR. Bệnh nhân dễ dàng truy cập lịch trình theo dõi, nhắc nhở uống thuốc 
+                và hướng dẫn hồi phục — mọi lúc, mọi nơi, ngay cả khi không có kết nối mạng.
+            </p>
+
+            <div class="hero-cta-group">
+                <a href="admin.html" class="btn btn-primary" id="cta-doctor">
+                    <i data-lucide="stethoscope"></i>
+                    Dành cho Bác sĩ
+                </a>
+                <a href="patient.html" class="btn btn-secondary" id="cta-patient">
+                    <i data-lucide="qr-code"></i>
+                    Dành cho Bệnh nhân
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ===== FEATURES ===== -->
+        <section class="landing-section features-section" id="features">
+            <div class="section-container">
+                <h2 class="section-title">Tính năng nổi bật</h2>
+                <span class="section-title-accent" aria-hidden="true"></span>
+
+                <div class="features-grid">
+                    <article class="landing-feature-card" id="feature-qr">
+                        <div class="feature-icon-wrap">
+                            <i data-lucide="zap"></i>
+                        </div>
+                        <h3 class="feature-title">Tạo QR Nhanh</h3>
+                        <p class="feature-desc">
+                            Chỉ với vài thao tác, bác sĩ có thể tạo mã QR chứa đầy đủ hướng dẫn 
+                            chăm sóc sau phẫu thuật cho từng bệnh nhân.
+                        </p>
+                    </article>
+
+                    <article class="landing-feature-card" id="feature-personalize">
+                        <div class="feature-icon-wrap">
+                            <i data-lucide="user-check"></i>
+                        </div>
+                        <h3 class="feature-title">Cá Nhân Hóa</h3>
+                        <p class="feature-desc">
+                            Mỗi hướng dẫn được tùy chỉnh theo loại phẫu thuật, tình trạng sức khỏe 
+                            và nhu cầu riêng của từng bệnh nhân.
+                        </p>
+                    </article>
+
+                    <article class="landing-feature-card" id="feature-tracking">
+                        <div class="feature-icon-wrap">
+                            <i data-lucide="calendar-check"></i>
+                        </div>
+                        <h3 class="feature-title">Theo Dõi Hàng Ngày</h3>
+                        <p class="feature-desc">
+                            Bệnh nhân nhận lịch trình theo dõi chi tiết từng ngày, bao gồm nhắc nhở 
+                            uống thuốc và các mốc kiểm tra quan trọng.
+                        </p>
+                    </article>
+
+                    <article class="landing-feature-card" id="feature-offline">
+                        <div class="feature-icon-wrap">
+                            <i data-lucide="wifi-off"></i>
+                        </div>
+                        <h3 class="feature-title">Hoạt Động Offline</h3>
+                        <p class="feature-desc">
+                            Toàn bộ dữ liệu được lưu trữ trực tiếp trong mã QR — không cần kết nối 
+                            internet để truy cập hướng dẫn chăm sóc.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== HOW IT WORKS ===== -->
+        <section class="landing-section how-section" id="how-it-works">
+            <div class="section-container">
+                <h2 class="section-title">Cách hoạt động</h2>
+                <span class="section-title-accent" aria-hidden="true"></span>
+
+                <div class="steps-container">
+                    <div class="landing-step" id="step-1">
+                        <div class="step-number">1</div>
+                        <div class="step-icon-wrap">
+                            <i data-lucide="clipboard-list"></i>
+                        </div>
+                        <h3 class="step-title">Bác sĩ nhập thông tin</h3>
+                        <p class="step-desc">
+                            Bác sĩ chọn loại phẫu thuật và nhập thông tin cần thiết cho bệnh nhân.
+                        </p>
+                    </div>
+
+                    <div class="step-connector" aria-hidden="true">
+                        <div class="step-connector-line"></div>
+                    </div>
+
+                    <div class="landing-step" id="step-2">
+                        <div class="step-number">2</div>
+                        <div class="step-icon-wrap">
+                            <i data-lucide="qr-code"></i>
+                        </div>
+                        <h3 class="step-title">Tạo mã QR</h3>
+                        <p class="step-desc">
+                            Hệ thống tự động tạo mã QR chứa toàn bộ hướng dẫn chăm sóc cá nhân hóa.
+                        </p>
+                    </div>
+
+                    <div class="step-connector" aria-hidden="true">
+                        <div class="step-connector-line"></div>
+                    </div>
+
+                    <div class="landing-step" id="step-3">
+                        <div class="step-number">3</div>
+                        <div class="step-icon-wrap">
+                            <i data-lucide="smartphone"></i>
+                        </div>
+                        <h3 class="step-title">Bệnh nhân quét & theo dõi</h3>
+                        <p class="step-desc">
+                            Bệnh nhân quét mã QR bằng điện thoại để xem hướng dẫn và theo dõi hồi phục.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="landing-footer" id="footer">
+        <p class="footer-brand">PostOp Care v2.0 — Phát triển bởi đội ngũ Y tế Số</p>
+        <p>© 2024 PostOp Care. Mọi quyền được bảo lưu.</p>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        lucide.createIcons();
+        // Intersection observer for fade-in animations
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeInUp');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.landing-feature-card, .landing-step').forEach(el => {
+            el.style.opacity = '0';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

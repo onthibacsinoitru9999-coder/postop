@@ -1,0 +1,79 @@
+{
+  "categories": [
+    {
+      "id": "general",
+      "name": "Ngoại tổng quát",
+      "icon": "🏥",
+      "procedures": [
+        {
+          "id": "lap_chole",
+          "name": "Cắt túi mật nội soi",
+          "name_en": "Laparoscopic Cholecystectomy",
+          "description": "Phẫu thuật cắt bỏ túi mật qua nội soi",
+          "recovery_days": 14,
+          "followup_days": [7, 14, 30],
+          "instruction_id": "lap_chole"
+        },
+        {
+          "id": "appe",
+          "name": "Cắt ruột thừa nội soi",
+          "name_en": "Laparoscopic Appendectomy",
+          "description": "Phẫu thuật cắt bỏ ruột thừa viêm qua nội soi",
+          "recovery_days": 10,
+          "followup_days": [7],
+          "instruction_id": "appe"
+        },
+        {
+          "id": "hernia",
+          "name": "Mổ thoát vị bẹn",
+          "name_en": "Hernia Repair",
+          "description": "Phẫu thuật phục hồi thành bụng do thoát vị",
+          "recovery_days": 21,
+          "followup_days": [7, 14],
+          "instruction_id": "hernia"
+        }
+      ]
+    },
+    {
+      "id": "ortho",
+      "name": "Chỉnh hình",
+      "icon": "🦴",
+      "procedures": [
+        {
+          "id": "tka",
+          "name": "Thay khớp gối toàn phần",
+          "name_en": "Total Knee Arthroplasty",
+          "description": "Phẫu thuật thay thế khớp gối bị hỏng",
+          "recovery_days": 90,
+          "followup_days": [14, 30, 90],
+          "instruction_id": "tka"
+        },
+        {
+          "id": "acl",
+          "name": "Tái tạo dây chằng chéo trước",
+          "name_en": "ACL Reconstruction",
+          "description": "Phẫu thuật nối/tái tạo dây chằng khớp gối",
+          "recovery_days": 180,
+          "followup_days": [14, 30, 60, 90],
+          "instruction_id": "acl"
+        }
+      ]
+    },
+    {
+      "id": "obgyn",
+      "name": "Sản phụ khoa",
+      "icon": "🤰",
+      "procedures": [
+        {
+          "id": "c_section",
+          "name": "Mổ lấy thai",
+          "name_en": "Cesarean Section",
+          "description": "Phẫu thuật đưa thai nhi ra ngoài qua đường bụng",
+          "recovery_days": 42,
+          "followup_days": [7, 30],
+          "instruction_id": "c_section"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,194 @@
+{
+  "instructions": {
+    "lap_chole": {
+      "procedure_id": "lap_chole",
+      "wound_care": {
+        "title": "Chăm sóc vết mổ",
+        "icon": "🩹",
+        "steps": [
+          { "day_range": "1-3", "instruction": "Giữ vết mổ khô ráo và sạch sẽ. Không tự ý gỡ băng.", "important": true },
+          { "day_range": "3-7", "instruction": "Có thể tắm nhanh dưới vòi hoa sen, nhưng tránh chà xát trực tiếp lên vết mổ." },
+          { "day_range": "7-14", "instruction": "Thay băng hàng ngày nếu băng bị ướt hoặc bẩn. Có thể để hở vết mổ nếu đã khô miệng." }
+        ]
+      },
+      "diet": {
+        "title": "Chế độ ăn uống",
+        "icon": "🍽️",
+        "phases": [
+          { "day_range": "1-2", "instruction": "Ăn thức ăn lỏng, cháo, súp. Tránh đồ ăn nhiều dầu mỡ để hạn chế buồn nôn." },
+          { "day_range": "3-7", "instruction": "Chuyển dần sang thức ăn mềm, dễ tiêu hóa. Chia nhỏ bữa ăn trong ngày." },
+          { "day_range": "7+", "instruction": "Ăn uống bình thường lại, nhưng vẫn nên hạn chế thức ăn quá nhiều chất béo." }
+        ]
+      },
+      "activity": {
+        "title": "Vận động",
+        "icon": "🚶",
+        "restrictions": [
+          { "day_range": "1-3", "instruction": "Nghỉ ngơi nhiều. Đi lại nhẹ nhàng trong nhà để tránh huyết khối." },
+          { "day_range": "3-14", "instruction": "Tránh nâng vác vật nặng quá 5kg. Không tập thể dục cường độ cao." },
+          { "day_range": "14+", "instruction": "Có thể trở lại các hoạt động thể chất và làm việc nhẹ nhàng." }
+        ]
+      },
+      "daily_checklist": [
+        { "id": "take_med", "label": "Uống thuốc đúng theo toa", "icon": "💊" },
+        { "id": "wound_check", "label": "Kiểm tra tình trạng vết mổ", "icon": "🔍" },
+        { "id": "temp_check", "label": "Đo thân nhiệt", "icon": "🌡️" },
+        { "id": "walk", "label": "Đi bộ nhẹ 10-15 phút", "icon": "🚶" }
+      ]
+    },
+    "appe": {
+      "procedure_id": "appe",
+      "wound_care": {
+        "title": "Chăm sóc vết mổ",
+        "icon": "🩹",
+        "steps": [
+          { "day_range": "1-3", "instruction": "Giữ vết mổ nội soi khô ráo. Không cào gãi vùng mổ.", "important": true },
+          { "day_range": "3-10", "instruction": "Thay băng theo hướng dẫn nếu thấm dịch. Không ngâm bồn tắm." }
+        ]
+      },
+      "diet": {
+        "title": "Chế độ ăn uống",
+        "icon": "🍽️",
+        "phases": [
+          { "day_range": "1-2", "instruction": "Ăn cháo loãng, uống nhiều nước. Chỉ ăn khi đã xì hơi được." },
+          { "day_range": "3+", "instruction": "Ăn uống đa dạng, bổ sung nhiều chất xơ để tránh táo bón." }
+        ]
+      },
+      "activity": {
+        "title": "Vận động",
+        "icon": "🚶",
+        "restrictions": [
+          { "day_range": "1-7", "instruction": "Đi lại chậm rãi để giúp ruột hoạt động tốt hơn." },
+          { "day_range": "7+", "instruction": "Tránh các môn thể thao va chạm trong vòng 1 tháng." }
+        ]
+      },
+      "daily_checklist": [
+        { "id": "take_med", "label": "Uống thuốc đúng giờ", "icon": "💊" },
+        { "id": "bowel_movement", "label": "Theo dõi việc đi tiêu", "icon": "🚽" }
+      ]
+    },
+    "hernia": {
+      "procedure_id": "hernia",
+      "wound_care": {
+        "title": "Chăm sóc vết mổ",
+        "icon": "🩹",
+        "steps": [
+          { "day_range": "1-7", "instruction": "Vùng bìu/bẹn có thể sưng nhẹ và bầm tím, đây là hiện tượng bình thường.", "important": true },
+          { "day_range": "7-14", "instruction": "Mặc quần lót hỗ trợ để giảm sưng bìu nếu được bác sĩ dặn." }
+        ]
+      },
+      "diet": {
+        "title": "Chế độ ăn uống",
+        "icon": "🍽️",
+        "phases": [
+          { "day_range": "1+", "instruction": "Uống nhiều nước, ăn nhiều rau quả để chống táo bón. Rặn mạnh khi đi tiêu có thể làm tổn thương chỗ mổ." }
+        ]
+      },
+      "activity": {
+        "title": "Vận động",
+        "icon": "🚶",
+        "restrictions": [
+          { "day_range": "1-14", "instruction": "Hoàn toàn không nâng vật nặng, không vặn mình đột ngột." },
+          { "day_range": "14-28", "instruction": "Có thể bắt đầu các hoạt động thể thao nhẹ như bơi lội sau 3-4 tuần." }
+        ]
+      },
+      "daily_checklist": [
+        { "id": "take_med", "label": "Uống thuốc chống táo bón (nếu có)", "icon": "💊" },
+        { "id": "swelling_check", "label": "Kiểm tra mức độ sưng vùng bẹn", "icon": "🔍" }
+      ]
+    },
+    "tka": {
+      "procedure_id": "tka",
+      "wound_care": {
+        "title": "Chăm sóc vết mổ",
+        "icon": "🩹",
+        "steps": [
+          { "day_range": "1-14", "instruction": "Giữ cho băng luôn khô ráo. Bác sĩ sẽ cắt chỉ sau khoảng 10-14 ngày.", "important": true }
+        ]
+      },
+      "diet": {
+        "title": "Chế độ ăn uống",
+        "icon": "🍽️",
+        "phases": [
+          { "day_range": "1+", "instruction": "Duy trì chế độ ăn giàu canxi và vitamin D để xương nhanh phục hồi." }
+        ]
+      },
+      "activity": {
+        "title": "Vận động",
+        "icon": "🚶",
+        "restrictions": [
+          { "day_range": "1-14", "instruction": "Sử dụng khung tập đi hoặc nạng. Chườm đá vùng gối 15-20 phút mỗi lần để giảm sưng." },
+          { "day_range": "14-45", "instruction": "Tập vật lý trị liệu mỗi ngày theo đúng bài tập được hướng dẫn." },
+          { "day_range": "45+", "instruction": "Tăng dần cường độ tập luyện để lấy lại biên độ vận động khớp." }
+        ]
+      },
+      "daily_checklist": [
+        { "id": "take_med", "label": "Uống thuốc đúng theo toa", "icon": "💊" },
+        { "id": "physio", "label": "Tập vật lý trị liệu", "icon": "💪" },
+        { "id": "ice_pack", "label": "Chườm đá vùng gối", "icon": "🧊" }
+      ]
+    },
+    "acl": {
+      "procedure_id": "acl",
+      "wound_care": {
+        "title": "Chăm sóc vết mổ",
+        "icon": "🩹",
+        "steps": [
+          { "day_range": "1-14", "instruction": "Mang nẹp gối cố định theo đúng chỉ định của bác sĩ.", "important": true }
+        ]
+      },
+      "diet": {
+        "title": "Chế độ ăn uống",
+        "icon": "🍽️",
+        "phases": [
+          { "day_range": "1+", "instruction": "Ăn uống bình thường, tăng cường đạm để phục hồi mô cơ." }
+        ]
+      },
+      "activity": {
+        "title": "Vận động",
+        "icon": "🚶",
+        "restrictions": [
+          { "day_range": "1-14", "instruction": "Sử dụng nạng khi di chuyển, không dồn trọng lượng lên chân mổ." },
+          { "day_range": "14-90", "instruction": "Tập vật lý trị liệu cường độ cao dần. Không xoay, vặn gối đột ngột." }
+        ]
+      },
+      "daily_checklist": [
+        { "id": "take_med", "label": "Uống thuốc đúng theo toa", "icon": "💊" },
+        { "id": "physio", "label": "Tập vật lý trị liệu", "icon": "💪" },
+        { "id": "wear_brace", "label": "Mang nẹp gối khi di chuyển", "icon": "🦿" }
+      ]
+    },
+    "c_section": {
+      "procedure_id": "c_section",
+      "wound_care": {
+        "title": "Chăm sóc vết mổ",
+        "icon": "🩹",
+        "steps": [
+          { "day_range": "1-7", "instruction": "Giữ vết mổ khô ráo, mặc đồ rộng rãi, thoáng mát tránh cọ xát vào vết mổ.", "important": true },
+          { "day_range": "7-14", "instruction": "Làm sạch vết mổ bằng cồn iot hoặc nước muối sinh lý theo hướng dẫn. Khi vết mổ đã lành, có thể tắm vòi hoa sen." }
+        ]
+      },
+      "diet": {
+        "title": "Chế độ ăn uống",
+        "icon": "🍽️",
+        "phases": [
+          { "day_range": "1-3", "instruction": "Chỉ ăn khi đã xì hơi. Ăn thực phẩm dễ tiêu (cháo loãng, súp). Uống nhiều nước ấm." },
+          { "day_range": "3+", "instruction": "Ăn đa dạng, bổ sung thức ăn nhiều sắt, protein và vitamin C để kích thích ra sữa và nhanh lành vết thương." }
+        ]
+      },
+      "activity": {
+        "title": "Vận động",
+        "icon": "🚶",
+        "restrictions": [
+          { "day_range": "1-7", "instruction": "Cố gắng vận động sớm và nhẹ nhàng để tránh dính ruột, giúp sản dịch thoát ra dễ dàng." },
+          { "day_range": "7-42", "instruction": "Không nâng nhấc vật nặng hơn trọng lượng của em bé. Tránh làm việc nhà quá sức." }
+        ]
+      },
+      "daily_checklist": [
+        { "id": "take_med", "label": "Uống thuốc đúng theo toa", "icon": "💊" },
+        { "id": "lochia_check", "label": "Theo dõi sản dịch", "icon": "🩸" },
+        { "id": "walk", "label": "Vận động, đi lại nhẹ nhàng", "icon": "🚶" }
+      ]
+    }
+  }
+}

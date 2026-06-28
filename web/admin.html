@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PostOp Care - Bảng điều khiển bác sĩ quản lý hướng dẫn chăm sóc sau phẫu thuật">
+  <meta name="theme-color" content="#0F172A">
+  <meta name="author" content="PostOp Care">
+  <meta name="robots" content="noindex, nofollow">
+  <title>PostOp Care - Bảng điều khiển Bác sĩ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* ===== CSS Custom Properties ===== */
+    :root {
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-display: 'Outfit', var(--font-sans);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+      --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.15);
+      --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ===== Dark Theme Tokens ===== */
+    body.dark {
+      --bg-primary: #0F172A;
+      --bg-secondary: #1E293B;
+      --bg-tertiary: #334155;
+      --bg-card: rgba(30, 41, 59, 0.7);
+      --bg-card-hover: rgba(51, 65, 85, 0.6);
+      --bg-overlay: rgba(0, 0, 0, 0.7);
+      --bg-glass: rgba(30, 41, 59, 0.5);
+      --border-subtle: rgba(148, 163, 184, 0.12);
+      --border-medium: rgba(148, 163, 184, 0.2);
+      --border-focus: rgba(99, 102, 241, 0.5);
+      --text-primary: #F1F5F9;
+      --text-secondary: #94A3B8;
+      --text-tertiary: #64748B;
+      --text-muted: #475569;
+      --accent-primary: #818CF8;
+      --accent-primary-hover: #6366F1;
+      --accent-primary-bg: rgba(99, 102, 241, 0.12);
+      --accent-success: #34D399;
+      --accent-success-bg: rgba(52, 211, 153, 0.12);
+      --accent-warning: #FBBF24;
+      --accent-warning-bg: rgba(251, 191, 36, 0.12);
+      --accent-danger: #F87171;
+      --accent-danger-bg: rgba(248, 113, 113, 0.12);
+      --accent-info: #38BDF8;
+      --accent-info-bg: rgba(56, 189, 248, 0.12);
+      --gradient-primary: linear-gradient(135deg, #818CF8 0%, #6366F1 50%, #4F46E5 100%);
+      --gradient-card: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+      --gradient-glow: radial-gradient(ellipse at 50% 0%, rgba(99, 102, 241, 0.15) 0%, transparent 60%);
+    }
+
+    /* ===== Global Reset & Base ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 600px;
+      background: var(--gradient-glow);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ===== Navigation Bar ===== */
+    .nav-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 64px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      background: var(--gradient-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    }
+
+    .nav-logo i { width: 20px; height: 20px; }
+
+    .nav-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: var(--accent-primary-bg);
+      color: var(--accent-primary);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-badge i { width: 14px; height: 14px; }
+
+    /* ===== Login Overlay ===== */
+    #login-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(2, 6, 23, 0.92);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 16px;
+      padding: 48px 36px 40px;
+      background: var(--gradient-card);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-xl);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5), var(--shadow-glow);
+      text-align: center;
+      animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .login-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 24px;
+      border-radius: 50%;
+      background: var(--accent-primary-bg);
+      border: 2px solid rgba(99, 102, 241, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-primary);
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.15); }
+      50% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.3); }
+    }
+
+    .login-icon i { width: 32px; height: 32px; }
+
+    .login-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .login-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+
+    .login-form { display: flex; flex-direction: column; gap: 16px; }
+
+    .input-group {
+      position: relative;
+      text-align: left;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .input-group .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-group .input-icon {
+      position: absolute;
+      left: 14px;
+      color: var(--text-tertiary);
+      pointer-events: none;
+      transition: color var(--transition-fast);
+    }
+
+    .input-group .input-icon i { width: 18px; height: 18px; }
+
+    .input-field {
+      width: 100%;
+      padding: 12px 16px 12px 44px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      transition: all var(--transition-fast);
+      outline: none;
+    }
+
+    .input-field:focus {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px var(--accent-primary-bg);
+    }
+
+    .input-field:focus ~ .input-icon,
+    .input-field:focus + .input-icon { color: var(--accent-primary); }
+
+    .input-field::placeholder { color: var(--text-muted); }
+
+    #login-error {
+      min-height: 20px;
+      font-size: 0.85rem;
+      color: var(--accent-danger);
+      text-align: center;
+      transition: opacity var(--transition-fast);
+    }
+
+    .login-note {
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+      margin-top: 8px;
+      padding: 10px;
+      background: rgba(99, 102, 241, 0.06);
+      border-radius: var(--radius-sm);
+      border: 1px dashed rgba(99, 102, 241, 0.15);
+    }
+
+    .login-note code {
+      background: var(--accent-primary-bg);
+      color: var(--accent-primary);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    /* ===== Buttons ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: var(--radius-md);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition-base);
+      outline: none;
+      white-space: nowrap;
+    }
+
+    .btn i { width: 18px; height: 18px; }
+
+    .btn-primary {
+      background: var(--gradient-primary);
+      color: white;
+      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-secondary {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-medium);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-ghost:hover {
+      background: var(--bg-glass);
+      color: var(--text-primary);
+    }
+
+    .btn-lg {
+      padding: 14px 28px;
+      font-size: 1rem;
+      border-radius: var(--radius-lg);
+    }
+
+    .btn-full { width: 100%; }
+
+    .btn-icon {
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border-radius: var(--radius-md);
+    }
+
+    /* ===== Main Content ===== */
+    #admin-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+    }
+
+    .page-header {
+      margin-bottom: 32px;
+    }
+
+    .page-header h1 {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 4px;
+    }
+
+    .page-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    /* ===== Stat Cards ===== */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .stat-card {
+      position: relative;
+      padding: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      overflow: hidden;
+      transition: all var(--transition-base);
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+
+    .stat-card:nth-child(1)::before { background: var(--gradient-primary); }
+    .stat-card:nth-child(2)::before { background: linear-gradient(135deg, #34D399, #10B981); }
+    .stat-card:nth-child(3)::before { background: linear-gradient(135deg, #FBBF24, #F59E0B); }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-medium);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .stat-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .stat-icon i { width: 22px; height: 22px; }
+
+    .stat-card:nth-child(1) .stat-icon {
+      background: var(--accent-primary-bg);
+      color: var(--accent-primary);
+    }
+
+    .stat-card:nth-child(2) .stat-icon {
+      background: var(--accent-success-bg);
+      color: var(--accent-success);
+    }
+
+    .stat-card:nth-child(3) .stat-icon {
+      background: var(--accent-warning-bg);
+      color: var(--accent-warning);
+    }
+
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* ===== Tab Navigation ===== */
+    .tab-nav {
+      display: flex;
+      gap: 4px;
+      padding: 4px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      margin-bottom: 24px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      background: transparent;
+      border: none;
+      border-radius: var(--radius-md);
+      color: var(--text-secondary);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+
+    .tab-btn i { width: 18px; height: 18px; }
+
+    .tab-btn:hover { color: var(--text-primary); }
+
+    .tab-btn.active {
+      background: var(--accent-primary-bg);
+      color: var(--accent-primary);
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15);
+    }
+
+    /* ===== Form Styles ===== */
+    .form-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .form-section-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .form-section-title i { width: 20px; height: 20px; color: var(--accent-primary); }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full-width { grid-column: 1 / -1; }
+
+    .form-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      letter-spacing: 0.02em;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: 11px 14px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      transition: all var(--transition-fast);
+      outline: none;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px var(--accent-primary-bg);
+    }
+
+    .form-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2394A3B8' viewBox='0 0 16 16'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+
+    .form-select option {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+    }
+
+    .form-textarea {
+      min-height: 100px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    /* ===== Medication Checkboxes ===== */
+    .medication-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 10px;
+    }
+
+    .med-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      user-select: none;
+    }
+
+    .med-checkbox:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-medium);
+    }
+
+    .med-checkbox input[type="checkbox"] {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--border-medium);
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .med-checkbox input[type="checkbox"]:checked {
+      background: var(--accent-primary);
+      border-color: var(--accent-primary);
+    }
+
+    .med-checkbox input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 5px;
+      width: 5px;
+      height: 9px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+
+    .med-checkbox input[type="checkbox"]:focus {
+      box-shadow: 0 0 0 3px var(--accent-primary-bg);
+    }
+
+    .med-label {
+      font-size: 0.88rem;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* ===== Form Actions ===== */
+    .form-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .form-actions .btn { flex: 1; }
+
+    /* ===== QR Output Section ===== */
+    #qr-output {
+      animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .qr-success-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .qr-success-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: var(--accent-success-bg);
+      color: var(--accent-success);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .qr-success-badge i { width: 16px; height: 16px; }
+
+    .qr-success-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .qr-container {
+      display: flex;
+      justify-content: center;
+      padding: 32px;
+      background: white;
+      border-radius: var(--radius-lg);
+      margin-bottom: 24px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    #qr-canvas {
+      display: block;
+      max-width: 280px;
+      width: 100%;
+      height: auto;
+    }
+
+    #qr-patient-summary {
+      padding: 20px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      margin-bottom: 24px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .qr-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    /* ===== History Tab ===== */
+    .search-bar {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .search-bar .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-tertiary);
+      pointer-events: none;
+    }
+
+    .search-bar .search-icon i { width: 18px; height: 18px; }
+
+    .search-bar input {
+      width: 100%;
+      padding: 12px 16px 12px 44px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      outline: none;
+      transition: all var(--transition-fast);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .search-bar input:focus {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px var(--accent-primary-bg);
+    }
+
+    .search-bar input::placeholder { color: var(--text-muted); }
+
+    #patient-history {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .history-item {
+      padding: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      transition: all var(--transition-base);
+      cursor: pointer;
+    }
+
+    .history-item:hover {
+      border-color: var(--border-medium);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 64px 24px;
+      text-align: center;
+    }
+
+    .empty-state-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--bg-tertiary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-tertiary);
+      margin-bottom: 16px;
+    }
+
+    .empty-state-icon i { width: 28px; height: 28px; }
+
+    .empty-state-text {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .empty-state-sub {
+      font-size: 0.82rem;
+      color: var(--text-tertiary);
+      margin-top: 4px;
+    }
+
+    /* ===== Preview Modal ===== */
+    #preview-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-overlay);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      animation: fadeIn 0.3s ease;
+    }
+
+    #preview-modal[hidden] { display: none; }
+
+    .modal-card {
+      width: 100%;
+      max-width: 640px;
+      max-height: 85vh;
+      margin: 0 16px;
+      background: var(--gradient-card);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--radius-xl);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .modal-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal-title i { width: 20px; height: 20px; color: var(--accent-primary); }
+
+    .modal-close {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .modal-close:hover {
+      background: var(--accent-danger-bg);
+      color: var(--accent-danger);
+      border-color: rgba(248, 113, 113, 0.2);
+    }
+
+    .modal-close i { width: 18px; height: 18px; }
+
+    .modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    #preview-content {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    /* ===== Toast Container ===== */
+    #toast-container {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      z-index: 500;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .toast {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      min-width: 300px;
+      max-width: 420px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      pointer-events: all;
+      animation: toastSlide 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes toastSlide {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .toast.toast-success { border-left: 3px solid var(--accent-success); }
+    .toast.toast-error { border-left: 3px solid var(--accent-danger); }
+    .toast.toast-info { border-left: 3px solid var(--accent-info); }
+
+    .toast-icon { flex-shrink: 0; }
+    .toast-icon i { width: 20px; height: 20px; }
+
+    .toast.toast-success .toast-icon { color: var(--accent-success); }
+    .toast.toast-error .toast-icon { color: var(--accent-danger); }
+    .toast.toast-info .toast-icon { color: var(--accent-info); }
+
+    .toast-message {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      flex: 1;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .stats-grid { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .medication-grid { grid-template-columns: 1fr; }
+      .form-actions { flex-direction: column; }
+      .qr-actions { flex-direction: column; }
+      .nav-bar { padding: 0 16px; }
+      #admin-content { padding: 20px 16px 60px; }
+      .login-card { padding: 36px 24px 32px; }
+      .stat-value { font-size: 1.75rem; }
+    }
+
+    @media (max-width: 480px) {
+      .nav-title { display: none; }
+      .tab-btn span { display: none; }
+    }
+  </style>
+</head>
+<body class="dark">
+
+  <!-- ===== Navigation Bar ===== -->
+  <nav class="nav-bar" role="navigation" aria-label="Thanh điều hướng chính">
+    <a href="index.html" class="nav-brand" aria-label="PostOp Care trang chủ">
+      <div class="nav-logo">
+        <i data-lucide="heart-pulse"></i>
+      </div>
+      <span class="nav-title">PostOp Care</span>
+    </a>
+    <div class="nav-badge">
+      <i data-lucide="stethoscope"></i>
+      Bác sĩ
+    </div>
+  </nav>
+
+  <!-- ===== Login Overlay ===== -->
+  <div id="login-overlay" role="dialog" aria-modal="true" aria-labelledby="login-heading">
+    <div class="login-card">
+      <div class="login-icon">
+        <i data-lucide="shield-check"></i>
+      </div>
+      <h2 class="login-title" id="login-heading">Đăng nhập Bác sĩ</h2>
+      <p class="login-subtitle">Nhập mật khẩu để truy cập bảng điều khiển</p>
+      <form class="login-form" onsubmit="return false;">
+        <div class="input-group">
+          <label for="login-password">Mật khẩu</label>
+          <div class="input-wrapper">
+            <input
+              type="password"
+              id="login-password"
+              class="input-field"
+              placeholder="Nhập mật khẩu..."
+              autocomplete="current-password"
+              required
+            >
+            <span class="input-icon">
+              <i data-lucide="lock"></i>
+            </span>
+          </div>
+        </div>
+        <div id="login-error" role="alert" aria-live="polite"></div>
+        <button type="submit" id="btn-login" class="btn btn-primary btn-lg btn-full">
+          <i data-lucide="log-in"></i>
+          Đăng nhập
+        </button>
+      </form>
+      <p class="login-note">
+        Mật khẩu mặc định: <code>postop2024</code>
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== Main Content ===== -->
+  <main id="admin-content" style="display:none;" role="main">
+
+    <!-- Page Header -->
+    <header class="page-header">
+      <h1>Bảng điều khiển Bác sĩ</h1>
+      <p class="page-subtitle">Quản lý hướng dẫn chăm sóc sau phẫu thuật cho bệnh nhân</p>
+    </header>
+
+    <!-- ===== Stats Grid ===== -->
+    <section class="stats-grid" aria-label="Thống kê tổng quan">
+      <article class="stat-card" id="stat-total">
+        <div class="stat-icon">
+          <i data-lucide="users"></i>
+        </div>
+        <div class="stat-value">0</div>
+        <div class="stat-label">Tổng bệnh nhân</div>
+      </article>
+      <article class="stat-card" id="stat-today">
+        <div class="stat-icon">
+          <i data-lucide="calendar"></i>
+        </div>
+        <div class="stat-value">0</div>
+        <div class="stat-label">Hôm nay</div>
+      </article>
+      <article class="stat-card" id="stat-qr">
+        <div class="stat-icon">
+          <i data-lucide="qr-code"></i>
+        </div>
+        <div class="stat-value">0</div>
+        <div class="stat-label">QR đã tạo</div>
+      </article>
+    </section>
+
+    <!-- ===== Tab Navigation ===== -->
+    <nav class="tab-nav" role="tablist" aria-label="Chuyển đổi tab">
+      <button class="tab-btn active" id="tab-btn-create" role="tab" aria-selected="true" aria-controls="tab-create">
+        <i data-lucide="plus-circle"></i>
+        <span>Tạo mới</span>
+      </button>
+      <button class="tab-btn" id="tab-btn-history" role="tab" aria-selected="false" aria-controls="tab-history">
+        <i data-lucide="history"></i>
+        <span>Lịch sử</span>
+      </button>
+    </nav>
+
+    <!-- ===== Tab 1: Create ===== -->
+    <section id="tab-create" role="tabpanel" aria-labelledby="tab-btn-create">
+      <form id="admin-form" novalidate>
+
+        <!-- Thông tin bệnh nhân -->
+        <div class="form-section">
+          <h2 class="form-section-title">
+            <i data-lucide="user"></i>
+            Thông tin bệnh nhân
+          </h2>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="patient-name">Tên bệnh nhân *</label>
+              <input type="text" id="patient-name" class="form-input" placeholder="Nhập tên bệnh nhân" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="doctor-name">Bác sĩ phụ trách *</label>
+              <input type="text" id="doctor-name" class="form-input" placeholder="Nhập tên bác sĩ" required>
+            </div>
+          </div>
+        </div>
+
+        <!-- Thông tin phẫu thuật -->
+        <div class="form-section">
+          <h2 class="form-section-title">
+            <i data-lucide="scissors"></i>
+            Thông tin phẫu thuật
+          </h2>
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label class="form-label" for="procedure-select">Loại phẫu thuật *</label>
+              <select id="procedure-select" class="form-select" required>
+                <option value="">-- Chọn loại phẫu thuật --</option>
+                <option value="appendectomy">Cắt ruột thừa (Appendectomy)</option>
+                <option value="hernia">Thoát vị bẹn (Hernia Repair)</option>
+                <option value="cholecystectomy">Cắt túi mật (Cholecystectomy)</option>
+                <option value="cesarean">Mổ lấy thai (Cesarean Section)</option>
+                <option value="knee_arthroscopy">Nội soi khớp gối (Knee Arthroscopy)</option>
+                <option value="tonsillectomy">Cắt amidan (Tonsillectomy)</option>
+                <option value="hemorrhoid">Cắt trĩ (Hemorrhoidectomy)</option>
+                <option value="thyroid">Cắt tuyến giáp (Thyroidectomy)</option>
+                <option value="general">Phẫu thuật tổng quát khác</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="surgery-date">Ngày phẫu thuật *</label>
+              <input type="date" id="surgery-date" class="form-input" required>
+            </div>
+            <div class="form-group full-width">
+              <label class="form-label" for="doctor-note">Ghi chú của bác sĩ</label>
+              <textarea id="doctor-note" class="form-textarea" placeholder="Nhập ghi chú hoặc lưu ý đặc biệt cho bệnh nhân..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Thuốc kê đơn -->
+        <div class="form-section">
+          <h2 class="form-section-title">
+            <i data-lucide="pill"></i>
+            Thuốc kê đơn
+          </h2>
+          <div class="medication-grid" id="medication-container">
+            <label class="med-checkbox">
+              <input type="checkbox" id="med-paracetamol" value="paracetamol">
+              <span class="med-label">Paracetamol 500mg</span>
+            </label>
+            <label class="med-checkbox">
+              <input type="checkbox" id="med-ibuprofen" value="ibuprofen">
+              <span class="med-label">Ibuprofen 400mg</span>
+            </label>
+            <label class="med-checkbox">
+              <input type="checkbox" id="med-amoxicillin" value="amoxicillin">
+              <span class="med-label">Amoxicillin 500mg</span>
+            </label>
+            <label class="med-checkbox">
+              <input type="checkbox" id="med-cephalexin" value="cephalexin">
+              <span class="med-label">Cephalexin 500mg</span>
+            </label>
+            <label class="med-checkbox">
+              <input type="checkbox" id="med-metronidazole" value="metronidazole">
+              <span class="med-label">Metronidazole 500mg</span>
+            </label>
+            <label class="med-checkbox">
+              <input type="checkbox" id="med-omeprazole" value="omeprazole">
+              <span class="med-label">Omeprazole 20mg</span>
+            </label>
+            <label class="med-checkbox">
+              <input type="checkbox" id="med-tramadol" value="tramadol">
+              <span class="med-label">Tramadol 50mg</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Tái khám -->
+        <div class="form-section">
+          <h2 class="form-section-title">
+            <i data-lucide="calendar-check"></i>
+            Tái khám
+          </h2>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="followup-date">Ngày tái khám</label>
+              <input type="date" id="followup-date" class="form-input">
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+          <button type="button" id="btn-preview" class="btn btn-secondary">
+            <i data-lucide="eye"></i>
+            Xem trước
+          </button>
+          <button type="button" id="btn-generate" class="btn btn-primary btn-lg">
+            <i data-lucide="qr-code"></i>
+            Tạo mã QR
+          </button>
+        </div>
+      </form>
+
+      <!-- ===== QR Output ===== -->
+      <div id="qr-output" style="display:none;" class="form-section">
+        <div class="qr-success-header">
+          <div class="qr-success-badge">
+            <i data-lucide="check-circle"></i>
+            Tạo thành công
+          </div>
+          <h2 class="qr-success-title">Mã QR hướng dẫn sau phẫu thuật</h2>
+        </div>
+        <div class="qr-container">
+          <canvas id="qr-canvas"></canvas>
+        </div>
+        <div id="qr-patient-summary"></div>
+        <div class="qr-actions">
+          <button type="button" id="btn-download" class="btn btn-primary">
+            <i data-lucide="download"></i>
+            Tải xuống
+          </button>
+          <button type="button" id="btn-print" class="btn btn-secondary">
+            <i data-lucide="printer"></i>
+            In
+          </button>
+          <button type="button" id="btn-new" class="btn btn-ghost">
+            <i data-lucide="plus"></i>
+            Tạo mới
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Tab 2: History ===== -->
+    <section id="tab-history" role="tabpanel" aria-labelledby="tab-btn-history" hidden>
+      <div class="search-bar">
+        <span class="search-icon">
+          <i data-lucide="search"></i>
+        </span>
+        <input type="text" id="history-search" placeholder="Tìm kiếm bệnh nhân theo tên..." aria-label="Tìm kiếm lịch sử bệnh nhân">
+      </div>
+      <div id="patient-history"></div>
+      <div id="history-empty" class="empty-state">
+        <div class="empty-state-icon">
+          <i data-lucide="clipboard-list"></i>
+        </div>
+        <p class="empty-state-text">Chưa có lịch sử</p>
+        <p class="empty-state-sub">Các bệnh nhân đã tạo QR sẽ hiển thị tại đây</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Preview Modal ===== -->
+  <div id="preview-modal" hidden role="dialog" aria-modal="true" aria-labelledby="preview-modal-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 class="modal-title" id="preview-modal-title">
+          <i data-lucide="file-text"></i>
+          Xem trước hướng dẫn
+        </h2>
+        <button type="button" id="btn-close-preview" class="modal-close" aria-label="Đóng xem trước">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="preview-content"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="document.getElementById('preview-modal').hidden=true;">
+          <i data-lucide="x"></i>
+          Đóng
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Toast Container ===== -->
+  <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- ===== Scripts ===== -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/database.js"></script>
+  <script src="js/qr-generator.js"></script>
+  <script src="js/admin.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
